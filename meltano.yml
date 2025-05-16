@@ -54,6 +54,16 @@ plugins:
               - ID NOTA
               - ID PRODUTO
             delimiter: ","
+
+    - name: tap-csv--again
+      inherit_from: tap-csv
+      config:
+        files:
+          - entity: estoque
+            path: ./output/cadastro_estoque_transformed.csv
+            keys:
+              - ID ESTOQUE
+            delimiter: ","
   loaders:
     - name: target-postgres
       variant: meltanolabs
