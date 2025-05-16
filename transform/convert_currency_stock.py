@@ -27,7 +27,7 @@ def clean_columns(table_column_map):
                         cur.execute(sql)
                 print("✅ All specified columns cleaned and converted to NUMERIC.")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     clean_columns(columns_to_clean)
