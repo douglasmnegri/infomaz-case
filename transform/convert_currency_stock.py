@@ -1,5 +1,4 @@
 import psycopg2
-
 conn_params = {
     "host": "localhost",
     "port": 5432,
@@ -10,7 +9,7 @@ conn_params = {
 
 columns_to_clean = {
     "cadastro_estoque": ["VALOR ESTOQUE", "QTD ESTOQUE"],
-    "vendas": ["VALOR NOTA", "VALOR ITEM"]
+    "vendas": ["VALOR NOTA", "VALOR ITEM", "QTD ITEM"]
 }
 
 def clean_columns(table_column_map):
