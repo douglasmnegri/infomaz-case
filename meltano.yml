@@ -2,18 +2,74 @@ version: 1
 default_environment: dev
 project_id: 89d0aeaf-86a0-418a-9c51-7fa4535e5a1e
 environments:
-- name: dev
-- name: staging
-- name: prod
+  - name: dev
+  - name: staging
+  - name: prod
 plugins:
   extractors:
-  - name: tap-csv
-    variant: meltanolabs
-    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
-    config:
-      files:
-      - entity: produtos
-        path: ./data/produtos.csv
-        keys:
-        - ID PRODUTO
-        delimiter: ','
+    - name: tap-csv
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+      config:
+        files:
+          - entity: produtos
+            path: ./data/produtos.csv
+            keys:
+              - ID PRODUTO
+            delimiter: ","
+    - name: tap-csv--cadcliente
+      inherit_from: tap-csv
+      config:
+        files:
+          - entity: cadastro_cliente
+            path: ./data/cadastro_cliente.csv
+            keys:
+              - ID CLIENTE
+            delimiter: ","
+    - name: tap-csv--cadestoque
+      inherit_from: tap-csv
+      config:
+        files:
+          - entity: cadastro_estoque
+            path: ./data/cadastro_estoque.csv
+            keys:
+              - ID ESTOQUE
+            delimiter: ","
+    - name: tap-csv--cadfornecedores
+      inherit_from: tap-csv
+      config:
+        files:
+          - entity: cadastro_fornecedores
+            path: ./data/cadastro_fornecedores.csv
+            keys:
+              - ID FORNECEDOR
+            delimiter: ","
+    - name: tap-csv--vendas
+      inherit_from: tap-csv
+      config:
+        files:
+          - entity: vendas
+            path: ./data/vendas.csv
+            keys:
+              - ID NOTA
+              - ID PRODUTO
+            delimiter: ","
+  loaders:
+    - name: target-postgres
+      variant: meltanolabs
+      pip_url: meltanolabs-target-postgres
+      config:
+        user: admin
+        password: pwd
+        host: localhost
+        port: 5432
+        database: infomaz-db
+        default_target_schema: public
+jobs:
+  - name: load-all-csv
+    tasks:
+      - tap-csv target-postgres
+      - tap-csv--cadcliente target-postgres
+      - tap-csv--cadestoque target-postgres
+      - tap-csv--cadfornecedores target-postgres
+      - tap-csv--vendas target-postgres
