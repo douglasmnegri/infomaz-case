@@ -9,7 +9,7 @@ conn_params = {
 }
 
 columns_to_clean = {
-    "cadastro_estoque": ["VALOR ESTOQUE"],
+    "cadastro_estoque": ["VALOR ESTOQUE", "QTD ESTOQUE"],
     "vendas": ["VALOR NOTA", "VALOR ITEM"]
 }
 
