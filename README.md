@@ -1,4 +1,4 @@
-# 📊 Desafio Técnico – Infomaz | CD Peers
+#  Desafio Técnico – Infomaz 
 
 Análise de dados para o estudo de caso proposto pela Infomaz, com foco em pipeline de ingestão, transformação e visualização usando Python, Meltano, Docker e Jupyter.
 
@@ -23,7 +23,7 @@ cd infomaz-case
 
 ```bash
 python3 -m venv venv_nome
-source venv_name/bin/activate  # macOS/Linux
+source venv_nome/bin/activate  # macOS/Linux
 ```
 
 3. Instale as dependências através do requirements.txt 
@@ -43,7 +43,6 @@ pip install -r requirements.txt
 1. Partindo do diretório raíz (infomaz-case) execute docker-compose.yml que contém base de dados do projeto:
 
 ```bash
-docker-compose up --build
 docker-compose up -d
 ```
 
@@ -66,7 +65,7 @@ jupyter notebook notebook/infomaz_analysis.ipynb
 ```
 
 5. Acesse o dashboard no navegador:
-🔗 http://localhost:8888/notebooks/infomaz_analysis.ipynb
+- 🔗 http://localhost:8888/notebooks/infomaz_analysis.ipynb
 
 ## Considerações
 
